@@ -41,7 +41,7 @@ matzal.com
 
 Created a security group `ManagementShare` containing all Management users and one HR user. The group was used to control access to the Management shared folder.
 
-![ManagementShare Group](https://github.com/MateuszZalew/active-directory-home-lab/blob/1524f07bbebf31f12082c5735d4541e48235e750/screenshots/management-share-group.png)
+![ManagementShare Group](https://github.com/MateuszZalew/active-directory-home-lab/blob/2cb1d43cdbdc42549702b1abe433ff504647f70d/screenshots/management-share-group.png)
 
 ## Group Policy
 
@@ -57,6 +57,8 @@ Created a security group `ManagementShare` containing all Management users and o
 ![Account Lockout Policy](https://github.com/MateuszZalew/active-directory-home-lab/blob/1524f07bbebf31f12082c5735d4541e48235e750/screenshots/account-lockout-threshold-policy.png)
 
 Tested the account lockout policy by intentionally entering an incorrect password three times and verifying that the account was locked.
+
+![Locked account](https://github.com/MateuszZalew/active-directory-home-lab/blob/2cb1d43cdbdc42549702b1abe433ff504647f70d/screenshots/locked_account_3_invalid_logons.png)
 
 ### Desktop Background Policy
 
@@ -113,6 +115,10 @@ ManagementShare
 Allowed user:
 
 ![Shared Folder View on Domain Client](https://github.com/MateuszZalew/active-directory-home-lab/blob/1524f07bbebf31f12082c5735d4541e48235e750/screenshots/access-shared-folder.png)
+
+Denied user:
+
+![Denied access to shared folder](https://github.com/MateuszZalew/active-directory-home-lab/blob/2cb1d43cdbdc42549702b1abe433ff504647f70d/screenshots/shared_folder_denied_access.png)
 
 I mapped network disc for easier access in File Explorer:
 
