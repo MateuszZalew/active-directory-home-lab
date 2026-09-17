@@ -20,7 +20,7 @@ param (
 
 #Generate Random Password
 $Password = -join((0x30..0x39)+(0x41..0x5A)+(0x61..0x7A) | Get-Random -Count 12 | ForEach-Object {[char]$_})
-Write-Host "Password Generated as: $Password"
+Write-Host "Password generated successfully." -ForegroundColor Green
 
 $SecurePassword = ($Password | ConvertTo-SecureString -AsPlainText -Force)
 
