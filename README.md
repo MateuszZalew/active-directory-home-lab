@@ -41,20 +41,33 @@ matzal.com
 
 Created a security group `ManagementShare` containing all Management users and one HR user. The group was used to control access to the Management shared folder.
 
+![ManagementShare Group](https://github.com/MateuszZalew/active-directory-home-lab/blob/1524f07bbebf31f12082c5735d4541e48235e750/screenshots/management-share-group.png)
+
 ## Group Policy
 
 ### Password Policy
 * Minimum password length
 * Maximum password age
 
+![Default Domain Policy - Password Policy](https://github.com/MateuszZalew/active-directory-home-lab/blob/1524f07bbebf31f12082c5735d4541e48235e750/screenshots/default-domain-policy-password-policies.png)
+
 ### Account Lockout Policy
 * Account lockout threshold
+
+![Account Lockout Policy](https://github.com/MateuszZalew/active-directory-home-lab/blob/1524f07bbebf31f12082c5735d4541e48235e750/screenshots/account-lockout-threshold-policy.png)
 
 Tested the account lockout policy by intentionally entering an incorrect password three times and verifying that the account was locked.
 
 ### Desktop Background Policy
 
-Configured Desktop Wallpaper for the Management OU. The background.jpeg file has been added in the `NETLOGON` shared directory.
+Configured Desktop Wallpaper for the Management OU. The background.jpg file has been added in the `NETLOGON` shared directory.
+
+File:
+```
+management_wallpaper.jpg
+```
+
+![Desktop File](https://github.com/MateuszZalew/active-directory-home-lab/blob/1524f07bbebf31f12082c5735d4541e48235e750/screenshots/management-wallpaper-file.png)
 
 GPOs:
 ```
@@ -62,15 +75,25 @@ SetManagementBackground
 PreventChangeBackground
 ```
 
-Applied to:
-```
-Management OU
-```
+![PreventChangeBackground GPO](https://github.com/MateuszZalew/active-directory-home-lab/blob/1524f07bbebf31f12082c5735d4541e48235e750/screenshots/management-prevent-background-change.png)
 
 Wallpaper stored in:
 ```
 \\matzal.com\NETLOGON\management_wallpaper.jpg
 ```
+
+![Enabled Desktop Wallpaper](https://github.com/MateuszZalew/active-directory-home-lab/blob/1524f07bbebf31f12082c5735d4541e48235e750/screenshots/management-desktop-wallpaper.png)
+
+Applied to:
+```
+Management OU
+```
+
+![Prevent Desktop Change](https://github.com/MateuszZalew/active-directory-home-lab/blob/1524f07bbebf31f12082c5735d4541e48235e750/screenshots/prevent-desktop-change-view.png)
+
+Test by logging in as a member of `Management OU` and checking the set desktop background:
+
+![Desktop Wallpaper](https://github.com/MateuszZalew/active-directory-home-lab/blob/1524f07bbebf31f12082c5735d4541e48235e750/screenshots/desktop-wallpaper.png)
 
 ## Shared Folder & Permissions
 
@@ -84,3 +107,15 @@ ManagementShare
 | Management user | ManagementShare | Allowed |
 | HR user | ManagementShare | Allowed |
 | Other user | No membership | Denied |
+
+![Shared Folder Permissions](https://github.com/MateuszZalew/active-directory-home-lab/blob/1524f07bbebf31f12082c5735d4541e48235e750/screenshots/shared-folder-permissions.png)
+
+Allowed user:
+
+![Shared Folder View on Domain Client](https://github.com/MateuszZalew/active-directory-home-lab/blob/1524f07bbebf31f12082c5735d4541e48235e750/screenshots/access-shared-folder.png)
+
+I mapped network disc for easier access in File Explorer:
+
+![Mapped Network Drive](https://github.com/MateuszZalew/active-directory-home-lab/blob/1524f07bbebf31f12082c5735d4541e48235e750/screenshots/map-share-folder-for-easier-access-in-file-explorer.png)
+
+
