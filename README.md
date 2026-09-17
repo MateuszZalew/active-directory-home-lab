@@ -146,6 +146,8 @@ I mapped the network drive for easier access in File Explorer:
 
 Installed RSAT Active Directory Domain Services and Lightweight Directory Services Tools on the Windows 11 client. I then used PowerShell Active Directory cmdlets from the Windows 11 client to query and manage domain objects.
 
+![RSAT installed on client VM](https://github.com/MateuszZalew/active-directory-home-lab/blob/382f3c25e32c2df82d18217e22f66418a22cd50e/screenshots/rsat-installed-on-client-vm.png)
+
 ## PowerShell Automation
 
 Created a PowerShell script to automate the creation of Active Directory users.
