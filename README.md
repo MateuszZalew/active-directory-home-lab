@@ -4,6 +4,16 @@ A hands-on Active Directory home lab built with Windows Server 2022 and Windows 
 
 The project demonstrates the configuration and administration of a small Windows domain environment, including Active Directory, Group Policy, user and group management, shared resources, access control and PowerShell automation.
 
+## Table of Contents
+
+- [Technologies](#technologies)
+- [Lab Architecture](#lab-architecture)
+- [Active Directory Configuration](#active-directory-configuration)
+- [Group Policy](#group-policy)
+- [Shared Folder and Permissions](#shared-folder-and-permissions)
+- [PowerShell Automation](#powershell-automation)
+- [Testing and Troubleshooting](#testing-and-troubleshooting)
+
 ## Technologies
 
 - Windows Server 2022
@@ -50,7 +60,6 @@ matzal.com
 ├── Management
 │   └── Dariusz
 │   └── Dominik
-│   └── ManagementShare (group)
 ```
 
 ### Groups
@@ -78,7 +87,7 @@ Tested the account lockout policy by intentionally entering an incorrect passwor
 
 ### Desktop Background Policy
 
-Configured a desktop wallpaper GPO and linked it to the Management OU. The background.jpg file has been added in the `NETLOGON` shared directory.
+Configured a desktop wallpaper GPO and linked it to the Management OU. The `management_wallpaper.jpg` file has been added in the `NETLOGON` shared directory.
 
 File:
 ```
@@ -115,7 +124,7 @@ Tested by logging in as a user from the `Management OU` and checking the desktop
 
 ![Desktop Wallpaper](https://github.com/MateuszZalew/active-directory-home-lab/blob/1524f07bbebf31f12082c5735d4541e48235e750/screenshots/desktop-wallpaper.png)
 
-## Shared Folder & Permissions
+## Shared Folder and Permissions
 
 Group with permissions to the shared folder called `ManagementShare`:
 ```
@@ -144,7 +153,7 @@ I mapped the network drive for easier access in File Explorer:
 
 ## Remote Server Administration Tools (RSAT)
 
-Installed RSAT Active Directory Domain Services and Lightweight Directory Services Tools on the Windows 11 client. I then used PowerShell Active Directory cmdlets from the Windows 11 client to query and manage domain objects.
+Installed RSAT Active Directory Domain Services and Lightweight Directory Services Tools on the Windows 11 client. Used PowerShell Active Directory cmdlets from the Windows 11 client to query and manage domain objects.
 
 ![RSAT installed on client VM](https://github.com/MateuszZalew/active-directory-home-lab/blob/382f3c25e32c2df82d18217e22f66418a22cd50e/screenshots/rsat-installed-on-client-vm.png)
 
@@ -168,6 +177,8 @@ It then automatically:
 4. Enables the account
 5. Requires password change at first logon
 
+![PowerShell Create AD User Script](https://github.com/MateuszZalew/active-directory-home-lab/blob/8af8ab91b2016f2b9f0ecc9731f72e55cfb179cb/screenshots/power-shell-create-ad-user-script.png)
+
 ![Successful user creation](https://github.com/MateuszZalew/active-directory-home-lab/blob/912b1de01b48c574300a3024c7f9b722f2d7083b/screenshots/power-shell-script-success-create-user.png)
 
 Full script is in the repo files, part of the script:
@@ -188,7 +199,7 @@ New-ADUser `
     -Server "PL-DC-01.matzal.com"
 ```
 
-## Testing & Troubleshooting
+## Testing and Troubleshooting
 
 ### Network connectivity
 ```
@@ -204,9 +215,9 @@ nltest /dsgetdc:matzal.com
 ```
 whoami
 hostname
-Get-ADComputer -Filter *
-Get-ADDomain
-Get-ADUser <username> -Properties * | Select-Object Name, Pass*
+Get-ADComputer WS01 -Server "PL-DC-01.matzal.com"
+Get-ADDomain -Server "PL-DC-01.matzal.com"
+Get-ADUser <username> -Properties * | Select-Object Name, SamAccountName, Enabled
 ```
 
-The lab was tested using DNS resolution, domain controller discovery, Active Directory PowerShell queries, domain authentication, Group Policy application, account lockout and shared folder access.
+Testing covered DNS resolution, domain controller discovery, Active Directory PowerShell queries, domain authentication, Group Policy application, account lockout and shared folder access.
