@@ -168,6 +168,8 @@ It then automatically:
 4. Enables the account
 5. Requires password change at first logon
 
+![Successful user creation](https://github.com/MateuszZalew/active-directory-home-lab/blob/912b1de01b48c574300a3024c7f9b722f2d7083b/screenshots/power-shell-script-success-create-user.png)
+
 Full script is in the repo files, part of the script:
 
 ```
@@ -200,6 +202,11 @@ nltest /dsgetdc:matzal.com
 
 ### AD PowerShell
 ```
+whoami
+hostname
+Get-ADComputer -Filter *
 Get-ADDomain
 Get-ADUser <username> -Properties * | Select-Object Name, Pass*
 ```
+
+The lab was tested using DNS resolution, domain controller discovery, Active Directory PowerShell queries, domain authentication, Group Policy application, account lockout and shared folder access.
