@@ -6,6 +6,8 @@ The project demonstrates the configuration and administration of a small Windows
 
 ## Lab Architecture
 
+![Lab Architecture](https://github.com/MateuszZalew/active-directory-home-lab/blob/a5fb1d8f2cbe28d86918f36015c677e2cd5ef00c/images/ad-home-lab-architecture.png)
+
 | VM | OS | Hostname | IP | Role |
 | --- | --- | --- | --- | --- |
 | Server | Windows Server 2022 | PL-DC-01 | 10.0.2.3 | Domain Controller |
@@ -37,7 +39,7 @@ matzal.com
 
 ### Groups
 
-Created a security group ManagementShare containing all Management users and one HR user. The group was used to control access to the Management shared folder.
+Created a security group `ManagementShare` containing all Management users and one HR user. The group was used to control access to the Management shared folder.
 
 ## Group Policy
 
@@ -45,8 +47,40 @@ Created a security group ManagementShare containing all Management users and one
 * Minimum password length
 * Maximum password age
 
+### Account Lockout Policy
+* Account lockout threshold
 
+Tested the account lockout policy by intentionally entering an incorrect password three times and verifying that the account was locked.
 
+### Desktop Background Policy
 
+Configured Desktop Wallpaper for the Management OU. The background.jpeg file has been added in the `NETLOGON` shared directory.
 
+GPOs:
+```
+SetManagementBackground
+PreventChangeBackground
+```
 
+Applied to:
+```
+Management OU
+```
+
+Wallpaper stored in:
+```
+\\matzal.com\NETLOGON\management_wallpaper.jpg
+```
+
+## Shared Folder & Permissions
+
+Group:
+```
+ManagementShare
+```
+
+| User | Group Membership | Access |
+| --- | --- | --- |
+| Management user | ManagementShare | Allowed |
+| HR user | ManagementShare | Allowed |
+| Other user | No membership | Denied |
